@@ -2,5 +2,5 @@ pluginManagement {
     includeBuild("build-logic")
 }
 
-rootProject.name = "lib-multimodule-template"
+rootProject.name = "spring-multimodule-template"
 include("core")

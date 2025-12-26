@@ -1,9 +1,5 @@
 plugins {
-    id("lib-multimodule-template.module")
+    id("spring-multimodule-template.service")
 }
 
 description = "Core."
-
-mavenPublishing {
-    pom { name = "Core library" }
-}
