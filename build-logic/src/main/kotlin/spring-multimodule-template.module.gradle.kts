@@ -19,8 +19,15 @@ dependencies {
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlinx.coroutines.slf4j)
     implementation(libs.kotlin.logging)
+    runtimeOnly(kotlin("reflect"))
 
     testImplementation(libs.bundles.testing)
+}
+
+configurations.all {
+    resolutionStrategy {
+        force("org.jetbrains.kotlin:kotlin-reflect:${libs.versions.kotlin.get()}") // fix jpa error "java.lang.NoClassDefFoundError: kotlin/reflect/full/KClasses"
+    }
 }
 
 kotlin { jvmToolchain(17) }
