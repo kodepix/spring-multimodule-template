@@ -347,6 +347,7 @@ internal inline fun <reified TResult> ServerRequest.withId(response: Response, h
 
 @PublishedApi
 internal inline fun <reified TResult> ServerRequest.noParams(response: Response, handler: ServerRequest.() -> TResult) = run {
+    val routeInfo = RouteInfo(this)
     val result = handler()
     response.respond(result)
 }

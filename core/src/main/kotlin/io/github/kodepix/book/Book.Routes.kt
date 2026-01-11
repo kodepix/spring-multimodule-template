@@ -62,3 +62,7 @@ val bookRoutes = router {
         }
     }
 }
+
+private fun ServerRequest.header(function: () -> String) {
+    TODO("Not yet implemented")
+}

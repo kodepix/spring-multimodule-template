@@ -1,8 +1,12 @@
 package io.github.kodepix.spring.dsl.request
 
 import io.github.kodepix.commons.*
+import io.github.kodepix.spring.dsl.response.ResponseBuilder
+import org.springframework.web.reactive.function.server.queryParamOrNull
 import org.springframework.web.servlet.function.*
+import java.security.Principal
 import java.util.*
+import kotlin.collections.orEmpty
 import kotlin.reflect.*
 
 /**
@@ -35,4 +39,18 @@ internal fun convertPrimitives(klass: KClass<*>, value: String) = when (klass) {
     UUID::class -> uuid(value)
     String::class -> value
     else -> null
+}
+
+
+class RouteInfo(
+    val request: ServerRequest,
+    val response: ResponseBuilder = ResponseBuilder()
+) {
+    lateinit var principal: Principal
+    fun id(name: String = "id") = uuid(pathVar(name))
+//    fun page(name: String = "p") = param(name)?.toIntOrNull() ?: 0
+    fun pathVar(name: String): String = request.pathVariable(name)
+    fun header(name: String): String? = request.headers().firstHeader(name)
+//    fun param(name: String) = request.queryParamOrNull(name)
+//    fun params(name: String) = request.queryParams()[name].orEmpty().toList()
 }
